@@ -1,0 +1,32 @@
+# profile.yaml にコピーして自分の情報に書き換える（cp profile.example.yaml profile.yaml）
+# ここに書いた実績だけが応募文に使われます。盛らずに正確に書いてください。
+
+name: 山田 太郎
+experience: 切り抜き動画編集 1年（累計 300本以上）
+tools: Premiere Pro / After Effects / DaVinci Resolve / Vrew（テロップ自動化）
+capacity: 週10〜15本（ショート・横長どちらも可）
+delivery: 素材受領から24〜48時間で初稿
+contact_hours: 平日 10〜22時（チャットは基本1時間以内に返信）
+
+strengths:
+  - 1本あたりの作業工程を自動化しているので、本数が多い継続案件でも納期を守れる
+  - 盛り上がり箇所の抽出からサムネ・タイトル案までまとめて対応できる
+  - テロップの色分けや効果音などチャンネルのトンマナに合わせられる
+
+portfolio:
+  - title: ゲーム実況チャンネルの切り抜き（ショート）
+    result: 最高 120万回再生／月40本納品
+    url: https://youtube.com/shorts/xxxx
+  - title: ビジネス系対談の切り抜き（横長）
+    result: チャンネル登録者 3,000人→1.2万人の期間を担当
+    url: https://youtube.com/watch?v=xxxx
+
+rates:
+  ショート(〜60秒): 1本 1,500円〜
+  横長(5〜10分): 1本 4,000円〜
+  サムネ込み: +1,000円
+
+signature: |
+  山田 太郎（切り抜き編集）
+  X: @your_handle
+  ポートフォリオ: https://example.com

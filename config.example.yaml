@@ -1,0 +1,82 @@
+# config.yaml にコピーして使う（cp config.example.yaml config.yaml）
+
+sources:
+  # ① 求人サイトの新着お知らせメール（いちばんおすすめ）
+  #   サイト側で「切り抜き」などの検索条件を保存し、新着メール通知をオンにしておく。
+  #   Gmail の場合は 2段階認証をオンにして「アプリパスワード」を発行し、環境変数に入れる:
+  #     CLIPJOBS_IMAP_USER=you@gmail.com
+  #     CLIPJOBS_IMAP_PASSWORD=アプリパスワード
+  mail:
+    enabled: true
+    host: imap.gmail.com
+    mailbox: INBOX
+    days: 2                 # 何日前までのメールを見るか
+    senders:
+      # from はアドレスの一部（ドメインだけでも可）。届いたメールを見て合わせてください。
+      - name: crowdworks
+        from: crowdworks.jp
+        url_patterns: ['crowdworks\.jp/public/jobs/\d+']
+      - name: lancers
+        from: lancers.jp
+        url_patterns: ['lancers\.jp/work/detail/\d+']
+      - name: coconala
+        from: coconala.com
+        url_patterns: ['coconala\.com/requests/\d+']
+
+  # ② サイトが公式に提供している RSS があれば追加（無ければ空のままでOK）
+  rss: []
+  #  - name: example
+  #    url: https://example.com/jobs.rss?keyword=切り抜き
+
+  # ③ 手動で見つけた募集（XのポストやDMなど）を貼り付けるフォルダ
+  inbox: inbox
+
+scoring:
+  # 含まれていたら加点
+  include_keywords:
+    切り抜き: 20
+    ショート: 10
+    Shorts: 10
+    継続: 15
+    長期: 10
+    YouTube: 5
+    VTuber: 5
+    ゲーム実況: 5
+    Premiere: 3
+    DaVinci: 3
+  # 含まれていたら除外
+  exclude_keywords:
+    - アダルト
+  # 怪しい案件のサイン（情報商材・初期費用・外部誘導など）。2個以上当たると除外
+  red_flags:
+    初期費用: -100
+    サポート費: -100
+    教材: -60
+    講座: -40
+    LINE(登録|追加|で連絡): -30
+    誰でも(簡単|稼げる): -40
+    月収\d+万: -30
+    無報酬: -50
+    無償: -50
+  max_red_flags: 2
+  min_budget_yen: 1000      # これ未満の報酬は減点
+  yen_per_point: 1000       # 報酬1,000円ごとに1点（上限30点）
+  min_score: 15             # これ未満は候補に出さない
+
+max_drafts: 10              # 1回で下書きを作る最大件数
+
+llm:
+  # anthropic: Claude API（環境変数 ANTHROPIC_API_KEY）
+  # command:   好きな CLI にプロンプトを渡す（例: Codex CLI）
+  # none:      テンプレートのみ
+  provider: anthropic
+  model: claude-opus-5-5
+  effort: medium
+  # provider: command のとき
+  # command: ["codex", "exec", "-"]
+
+notify:
+  discord_webhook_env: CLIPJOBS_DISCORD_WEBHOOK   # 空なら通知しない
+
+output_dir: out
+db: data/jobs.sqlite3

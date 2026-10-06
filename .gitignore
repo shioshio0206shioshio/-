@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+config.yaml
+profile.yaml
+data/
+out/
+inbox/*
+!inbox/.gitkeep
+.env
